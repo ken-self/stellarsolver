@@ -19,7 +19,7 @@ anbool index_overlaps_scale_range(index_t* meta,
     anbool rtn = 
         !((quadlo > meta->index_scale_upper) ||
           (quadhi < meta->index_scale_lower));
-    debug("index_overlaps_scale_range: index %s has quads [%g, %g] arcsec; image has quads [%g, %g] arcsec.  In range? %s\n",
+    debug("index_overlaps_scale_range: index %s has quads [%lg, %lg] arcsec; image has quads [%lg, %lg] arcsec.  In range? %s\n",
           meta->indexname, meta->index_scale_lower, meta->index_scale_upper, quadlo, quadhi, rtn ? "yes" : "no");
     return rtn;
 }
@@ -68,7 +68,7 @@ static void get_filenames(const char* indexname,
             if (skdtfn) *skdtfn = strdup(indexname);
             if (quadfn) *quadfn = strdup(indexname);
             *singlefile = TRUE;
-            logverb("Index name \"%s\" is readable; assuming singe file.\n", indexname);
+            logverb("Index name \"%s\" is readable; assuming single file.\n", indexname);
             return;
         }
         asprintf_safe(&fits, "%s.fits", indexname);
@@ -79,7 +79,7 @@ static void get_filenames(const char* indexname,
             if (skdtfn) *skdtfn = strdup(indexname);
             if (quadfn) *quadfn = strdup(indexname);
             *singlefile = TRUE;
-            logverb("Index name \"%s\" with .fits suffix, \"%s\", is readable; assuming singe file.\n", indexname, fits);
+            logverb("Index name \"%s\" with .fits suffix, \"%s\", is readable; assuming single file.\n", indexname, fits);
             free(fits);
             return;
         }
@@ -365,7 +365,7 @@ index_t* index_load(const char* indexname, int flags, index_t* dest) {
     dest->indexname = strdup(quadfile_get_filename(dest->quads));
     set_meta(dest);
 
-    logverb("Index scale: [%g, %g] arcmin, [%g, %g] arcsec\n",
+    logverb("Index scale: [%lg, %lg] arcmin, [%lg, %lg] arcsec\n",
             dest->index_scale_lower / 60.0, dest->index_scale_upper / 60.0,
             dest->index_scale_lower, dest->index_scale_upper);
     logverb("Index has %i quads and %i stars\n", dest->nquads, dest->nstars);
