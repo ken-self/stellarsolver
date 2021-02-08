@@ -434,7 +434,7 @@ int engine_run_job(engine_t* engine, job_t* job) {
         bp->indexes_inparallel = TRUE;
 
     if (job->use_radec_center) {
-        logmsg("Only searching for solutions within %g degrees of RA,Dec (%g,%g)\n",
+        logmsg("Only searching for solutions within %lg degrees of RA,Dec (%lg,%lg)\n",
                job->search_radius, job->ra_center, job->dec_center);
         solver_set_radec(sp, job->ra_center, job->dec_center, job->search_radius);
     }
@@ -515,7 +515,7 @@ int engine_run_job(engine_t* engine, job_t* job) {
                 if (job->use_radec_center)
                     inrange = index_is_within_range(index, job->ra_center, job->dec_center, job->search_radius);
                 if (!inrange) {
-                    logverb("Not using index %s because it's not within %g degrees of (RA,Dec) = (%g,%g)\n",
+                    logverb("Not using index %s because it's not within %lg degrees of (RA,Dec) = (%lg,%lg)\n",
                             index->indexname, job->search_radius, job->ra_center, job->dec_center);
                     continue;
                 }

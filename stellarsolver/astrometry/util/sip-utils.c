@@ -85,7 +85,7 @@ int sip_compute_inverse_polynomials(sip_t* sip, int NX, int NY,
     if (yhi == 0)
         yhi = tan->imageh;
 
-    logverb("NX,NY %i,%i, x range [%f, %f], y range [%f, %f]\n",
+    logverb("NX,NY %i,%i, x range [%lf, %lf], y range [%lf, %lf]\n",
             NX,NY, xlo, xhi, ylo, yhi);
 
     // Number of coefficients to solve for:

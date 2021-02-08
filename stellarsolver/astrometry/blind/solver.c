@@ -231,26 +231,26 @@ void solver_tweak2(solver_t* sp, MatchObj* mo, int order, sip_t* verifysip) {
 void solver_log_params(const solver_t* sp) {
     int i;
     logverb("Solver:\n");
-    logverb("  Arcsec per pix range: %g, %g\n", sp->funits_lower, sp->funits_upper);
-    logverb("  Image size: %g x %g\n", solver_field_width(sp), solver_field_height(sp));
-    logverb("  Quad size range: %g, %g\n", sp->quadsize_min, sp->quadsize_max);
+    logverb("  Arcsec per pix range: %lg, %lg\n", sp->funits_lower, sp->funits_upper);
+    logverb("  Image size: %lg x %lg\n", solver_field_width(sp), solver_field_height(sp));
+    logverb("  Quad size range: %lg, %lg\n", sp->quadsize_min, sp->quadsize_max);
     logverb("  Objs: %i, %i\n", sp->startobj, sp->endobj);
     logverb("  Parity: %i, %s\n", sp->parity, sp->parity == PARITY_NORMAL ? "normal" : (sp->parity == PARITY_FLIP ? "flip" : "both"));
     if (sp->use_radec) {
         double ra,dec,rad;
         xyzarr2radecdeg(sp->centerxyz, &ra, &dec);
         rad = distsq2deg(sp->r2);
-        logverb("  Use_radec? yes, (%g, %g), radius %g deg\n", ra, dec, rad);
+        logverb("  Use_radec? yes, (%lg, %lg), radius %lg deg\n", ra, dec, rad);
     } else {
         logverb("  Use_radec? no\n");
     }
-    logverb("  Verify_pix: %g\n", sp->verify_pix);
-    logverb("  Code tol: %g\n", sp->codetol);
+    logverb("  Verify_pix: %lg\n", sp->verify_pix);
+    logverb("  Code tol: %lg\n", sp->codetol);
     logverb("  Dist from quad bonus: %s\n", sp->distance_from_quad_bonus ? "yes" : "no");
-    logverb("  Distractor ratio: %g\n", sp->distractor_ratio);
-    logverb("  Log tune-up threshold: %g\n", sp->logratio_totune);
-    logverb("  Log bail threshold: %g\n", sp->logratio_bail_threshold);
-    logverb("  Log stoplooking threshold: %g\n", sp->logratio_stoplooking);
+    logverb("  Distractor ratio: %lg\n", sp->distractor_ratio);
+    logverb("  Log tune-up threshold: %lg\n", sp->logratio_totune);
+    logverb("  Log bail threshold: %lg\n", sp->logratio_bail_threshold);
+    logverb("  Log stoplooking threshold: %lg\n", sp->logratio_stoplooking);
     logverb("  Maxquads %i\n", sp->maxquads);
     logverb("  Maxmatches %i\n", sp->maxmatches);
     logverb("  Set CRPIX? %s", sp->set_crpix ? "yes" : "no\n");
@@ -793,7 +793,7 @@ void solver_run(solver_t* solver) {
         solver->minminAB2 = MAX(solver->minminAB2, square(solver->quadsize_min));
         if (solver->quadsize_max != 0.0)
             solver->maxmaxAB2 = MIN(solver->maxmaxAB2, square(solver->quadsize_max));
-        logverb("Quad scale range: [%g, %g] pixels\n", sqrt(solver->minminAB2), sqrt(solver->maxmaxAB2));
+        logverb("Quad scale range: [%lg, %lg] pixels\n", sqrt(solver->minminAB2), sqrt(solver->maxmaxAB2));
 
         // quick-n-dirty scale estimate using stars A,B.
         solver->abscale_high = square(arcsec2rad(solver->funits_upper) * (1.0 + solver->codetol));
@@ -1401,10 +1401,10 @@ static int solver_handle_hit(solver_t* sp, MatchObj* mo, sip_t* sip,
 
     if (mo->logodds >= sp->logratio_totune &&
         mo->logodds < sp->logratio_tokeep) {
-        logverb("Trying to tune up this solution (logodds = %g; %g)...\n",
+        logverb("Trying to tune up this solution (logodds = %lg; %lg)...\n",
                 mo->logodds, exp(mo->logodds));
         solver_tweak2(sp, mo, 1, NULL);
-        logverb("After tuning, logodds = %g (%g)\n",
+        logverb("After tuning, logodds = %lg (%lg)\n",
                 mo->logodds, exp(mo->logodds));
 
         // Since we tuned up this solution, we can't just accept the
@@ -1419,7 +1419,7 @@ static int solver_handle_hit(solver_t* sp, MatchObj* mo, sip_t* sip,
                        sp->logratio_stoplooking,
                        sp->distance_from_quad_bonus,
                        fake_match);
-            logverb("Checking tuned result: logodds = %g (%g)\n",
+            logverb("Checking tuned result: logodds = %lg (%lg)\n",
                     mo->logodds, exp(mo->logodds));
         }
     }
@@ -1436,7 +1436,7 @@ static int solver_handle_hit(solver_t* sp, MatchObj* mo, sip_t* sip,
     if (mo->logodds < sp->logratio_tokeep)
         return FALSE;
 
-    logverb("Pixel scale: %g arcsec/pix.\n", mo->scale);
+    logverb("Pixel scale: %lg arcsec/pix.\n", mo->scale);
     logverb("Parity: %s.\n", (mo->parity ? "neg" : "pos"));
 
     mo->index = sp->index;

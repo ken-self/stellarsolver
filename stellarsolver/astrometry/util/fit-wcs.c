@@ -306,7 +306,7 @@ int fit_sip_wcs(const double* starxyz,
     }
 
     if (weights)
-        logverb("Total weight: %g\n", totalweight);
+        logverb("Total weight: %lg\n", totalweight);
 
     if (ngood < M) {
         _gsl_vector_view sub_b1 = gsl_vector_subvector(b1, 0, ngood);
@@ -397,14 +397,14 @@ int fit_sip_wcs(const double* starxyz,
         sV =
             cdinv[1][0] * sx +
             cdinv[1][1] * sy;
-        logverb("Applying shift of sx,sy = %g,%g deg (%g,%g pix) to CRVAL and CD.\n",
+        logverb("Applying shift of sx,sy = %lg,%lg deg (%lg,%lg pix) to CRVAL and CD.\n",
                 sx, sy, sU, sV);
 
         sip_calc_inv_distortion(sipout, sU, sV, &su, &sv);
 
-        debug("sx = %g, sy = %g\n", sx, sy);
-        debug("sU = %g, sV = %g\n", sU, sV);
-        debug("su = %g, sv = %g\n", su, sv);
+        debug("sx = %lg, sy = %lg\n", sx, sy);
+        debug("sU = %lg, sV = %lg\n", sU, sV);
+        debug("su = %lg, sv = %lg\n", su, sv);
 
         wcs_shift(&(sipout->wcstan), -su, -sv);
     }

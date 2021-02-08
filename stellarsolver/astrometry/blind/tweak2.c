@@ -285,7 +285,7 @@ sip_t* tweak2(const double* fieldxy, int Nfield,
             gamma = pow(0.9, step);
             if (step == STEPS-1)
                 gamma = 0.0;
-            logverb("Annealing: order %i, step %i, gamma = %g\n", order, step, gamma);
+            logverb("Annealing: order %i, step %i, gamma = %lg\n", order, step, gamma);
 			
             debug("Using input WCS:\n");
             if (log_get_level() > LOG_VERB)
@@ -365,7 +365,7 @@ sip_t* tweak2(const double* fieldxy, int Nfield,
                                             &besti, &odds, &theta, NULL,
                                             &testperm, &refperm);
 
-            logverb("Logodds: %g\n", logodds);
+            logverb("Logodds: %lg\n", logodds);
             verify_count_hits(theta, besti, &nmatch, &nconf, &ndist);
             logverb("%i matches, %i distractors, %i conflicts (at best log-odds); %i field sources, %i index sources\n", nmatch, ndist, nconf, Nfield, Nin);
             verify_count_hits(theta, Nfield-1, &nmatch, &nconf, &ndist);
@@ -461,7 +461,7 @@ sip_t* tweak2(const double* fieldxy, int Nfield,
 
             if (crpix) {
                 tan_t temptan;
-                logverb("Moving tangent point to given CRPIX (%g,%g)\n", crpix[0], crpix[1]);
+                logverb("Moving tangent point to given CRPIX (%lg,%lg)\n", crpix[0], crpix[1]);
                 fit_tan_wcs_move_tangent_point_weighted(matchxyz, matchxy, weights, Nmatch,
                                                         crpix, &sipout->wcstan, &temptan);
                 fit_tan_wcs_move_tangent_point_weighted(matchxyz, matchxy, weights, Nmatch,
@@ -485,7 +485,7 @@ sip_t* tweak2(const double* fieldxy, int Nfield,
         }
     }
 
-    //logverb("Final logodds: %g\n", logodds);
+    //logverb("Final logodds: %lg\n", logodds);
 
     // Now, recompute final logodds after turning 'gamma' on again (?)
     // FIXME -- this counts the quad stars in the logodds...
@@ -537,7 +537,7 @@ sip_t* tweak2(const double* fieldxy, int Nfield,
                                         logodds_bail, HUGE_VAL,
                                         &besti, &odds, &theta, NULL,
                                         &testperm, &refperm);
-        logverb("Logodds: %g\n", logodds);
+        logverb("Logodds: %lg\n", logodds);
         verify_count_hits(theta, besti, &nmatch, &nconf, &ndist);
         logverb("%i matches, %i distractors, %i conflicts (at best log-odds); %i field sources, %i index sources\n", nmatch, ndist, nconf, Nfield, Nin);
         verify_count_hits(theta, Nfield-1, &nmatch, &nconf, &ndist);

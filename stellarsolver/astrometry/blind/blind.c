@@ -681,12 +681,12 @@ void blind_log_run_parameters(blind_t* bp) {
     if (bp->indexrdlsfname)
         logverb("indexrdlsfname %s\n", bp->indexrdlsfname);
     logverb("parity %i\n", sp->parity);
-    logverb("codetol %g\n", sp->codetol);
+    logverb("codetol %lg\n", sp->codetol);
     logverb("startdepth %i\n", sp->startobj);
     logverb("enddepth %i\n", sp->endobj);
-    logverb("fieldunits_lower %g\n", sp->funits_lower);
-    logverb("fieldunits_upper %g\n", sp->funits_upper);
-    logverb("verify_pix %g\n", sp->verify_pix);
+    logverb("fieldunits_lower %lg\n", sp->funits_lower);
+    logverb("fieldunits_upper %lg\n", sp->funits_upper);
+    logverb("verify_pix %lg\n", sp->verify_pix);
     if (bp->xcolname)
         logverb("xcolname %s\n", bp->xcolname);
     if (bp->ycolname)
@@ -695,7 +695,7 @@ void blind_log_run_parameters(blind_t* bp) {
     logverb("maxmatches %i\n", sp->maxmatches);
     logverb("cpulimit %f\n", bp->cpulimit);
     logverb("timelimit %i\n", bp->timelimit);
-    logverb("total_timelimit %g\n", bp->total_timelimit);
+    logverb("total_timelimit %lg\n", bp->total_timelimit);
     logverb("total_cpulimit %f\n", bp->total_cpulimit);
 }
 
@@ -915,14 +915,14 @@ static void add_blind_params(blind_t* bp, qfits_header* hdr) {
     fits_add_long_comment(hdr, "Solvedserver: %s", bp->solvedserver?bp->solvedserver:"(null)");
 
     fits_add_long_comment(hdr, "Parity: %i", sp->parity);
-    fits_add_long_comment(hdr, "Codetol: %g", sp->codetol);
-    fits_add_long_comment(hdr, "Verify pixels: %g pix", sp->verify_pix);
+    fits_add_long_comment(hdr, "Codetol: %lg", sp->codetol);
+    fits_add_long_comment(hdr, "Verify pixels: %lg pix", sp->verify_pix);
 
     fits_add_long_comment(hdr, "Maxquads: %i", sp->maxquads);
     fits_add_long_comment(hdr, "Maxmatches: %i", sp->maxmatches);
     fits_add_long_comment(hdr, "Cpu limit: %f s", bp->cpulimit);
     fits_add_long_comment(hdr, "Time limit: %i s", bp->timelimit);
-    fits_add_long_comment(hdr, "Total time limit: %g s", bp->total_timelimit);
+    fits_add_long_comment(hdr, "Total time limit: %lg s", bp->total_timelimit);
     fits_add_long_comment(hdr, "Total CPU limit: %f s", bp->total_cpulimit);
 
     fits_add_long_comment(hdr, "Tweak: %s", (sp->do_tweak ? "yes" : "no"));

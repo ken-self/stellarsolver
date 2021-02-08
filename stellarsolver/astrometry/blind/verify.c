@@ -1668,7 +1668,7 @@ double verify_star_lists_ror(double* refxys, int NR,
     v.badguys = malloc(v.NRall * sizeof(int));
 
     ror2 = verify_get_ror2(Q2, W*H, distractors, NR, pix2);
-    logverb("RoR: %g\n", sqrt(ror2));
+    logverb("RoR: %lg\n", sqrt(ror2));
 
     // Remove test stars outside the RoR.
     igood = ibad = 0;
@@ -1709,7 +1709,7 @@ double verify_star_lists_ror(double* refxys, int NR,
         }
     }
     effective_area = W*H * (double)Ngood / (double)NB;
-    logverb("Good bins: %i / %i; effA %g of %g\n", Ngood, NB, W*H, effective_area);
+    logverb("Good bins: %i / %i; effA %g of %lg\n", Ngood, NB, W*H, effective_area);
 
     // Remove ref stars outside RoR.
     igood = ibad = 0;
